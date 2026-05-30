@@ -1,19 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprendo Fácil - EPJA</title>
+    <title>Aprendo Fácil - EPJA (2° Básico)</title>
     <style>
-        /* Diseño Accesible - Colores claros y letras grandes */
+        /* Diseño Accesible DUA */
         :root {
             --bg-color: #f4f9f4;
             --text-color: #2c3e50;
             --primary-color: #3498db;
             --secondary-color: #2ecc71;
             --warning-color: #e74c3c;
-            --button-text: #ffffff;
+            --box-bg: #ffffff;
         }
 
         body {
@@ -22,7 +21,7 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            font-size: 1.5rem; /* Letra grande por defecto */
+            font-size: 1.4rem;
             line-height: 1.6;
         }
 
@@ -33,22 +32,20 @@
             padding: 20px;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
+        header h1 { margin: 0; font-size: 2.5rem; }
 
         nav {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
             background-color: #2980b9;
             padding: 15px;
         }
 
         button {
-            font-size: 1.3rem;
-            padding: 15px 30px;
+            font-size: 1.2rem;
+            padding: 15px 25px;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -57,241 +54,381 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        button:hover {
-            transform: scale(1.05);
-        }
+        button:hover { transform: scale(1.03); }
 
         .btn-nav { background-color: var(--primary-color); color: white; }
-        .btn-action { background-color: var(--secondary-color); color: white; }
-        .btn-audio { background-color: #f1c40f; color: #333; margin-bottom: 15px;}
+        .btn-action { background-color: var(--secondary-color); color: white; width: 100%; margin-top: 10px;}
+        .btn-audio { background-color: #f1c40f; color: #333; margin-bottom: 15px; display: block; width: 100%;}
+        .btn-option { background-color: #ecf0f1; color: var(--text-color); margin: 5px; width: 100%; text-align: left; border: 2px solid #bdc3c7;}
+        .btn-option:hover { background-color: #d5dbdb; }
+        
+        .game-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .btn-control { flex: 1; padding: 10px; font-size: 1.1rem; }
+        .btn-listen { background-color: #f39c12; color: white; }
+        .btn-reset { background-color: #95a5a6; color: white; }
         
         main {
             max-width: 900px;
-            margin: 30px auto;
+            margin: 20px auto;
             padding: 20px;
-            background: white;
+            background: var(--box-bg);
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        /* Ocultar secciones no activas */
         .section { display: none; }
         .section.active { display: block; }
 
-        /* Estilos del Juego */
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .game-btn {
-            font-size: 2rem;
+        .game-container {
+            border: 2px solid #ecf0f1;
             padding: 20px;
-            background-color: var(--primary-color);
-            color: white;
             border-radius: 15px;
-        }
-
-        .game-btn:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
+            margin-bottom: 30px;
+            background-color: #fafbfc;
         }
 
         .pedagogical-box {
             background-color: #e8f8f5;
             border-left: 8px solid var(--secondary-color);
             padding: 15px;
-            margin: 20px 0;
+            margin: 15px 0;
             border-radius: 0 10px 10px 0;
+            font-size: 1.2rem;
         }
 
         .feedback {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             min-height: 35px;
+            padding: 10px;
+            border-radius: 5px;
         }
 
+        .grid-sequence {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .btn-seq { font-size: 1.8rem; padding: 20px 30px; background-color: var(--primary-color); color: white; border-radius: 5px;}
+        .btn-seq:disabled { background-color: #bdc3c7; cursor: not-allowed; transform: none; }
+
+        .big-text { font-size: 2.2rem; font-weight: bold; text-align: center; color: var(--primary-color); letter-spacing: 5px; margin: 15px 0; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Aprendo Fácil</h1>
-        <p>Tu plataforma amigable para aprender paso a paso</p>
+        <p>Plataforma Educativa para Adultos - Nivel 2° Básico</p>
     </header>
 
     <nav>
-        <button class="btn-nav" onclick="showSection('inicio')">Inicio</button>
-        <button class="btn-nav" onclick="showSection('matematica')">Matemática</button>
-        <button class="btn-nav" onclick="showSection('lenguaje')">Lenguaje</button>
+        <button class="btn-nav" onclick="showSection('inicio')">🏠 Inicio</button>
+        <button class="btn-nav" onclick="showSection('matematica')">🔢 Matemática</button>
+        <button class="btn-nav" onclick="showSection('lenguaje')">📖 Lenguaje</button>
     </nav>
 
     <main>
         <section id="inicio" class="section active">
-            <h2>¡Bienvenido a Aprendo Fácil!</h2>
-            <p>Esta plataforma está diseñada especialmente para ti. Aquí podrás reforzar tus conocimientos de Matemática y Lenguaje de una forma sencilla y divertida.</p>
-            <p>Utiliza los botones de arriba para navegar. En cada sección encontrarás teoría, un botón para escuchar la explicación en audio y juegos interactivos.</p>
+            <h2>¡Bienvenido!</h2>
+            <button class="btn-audio" onclick="textToSpeech('texto-inicio')">🔊 Escuchar Bienvenida</button>
+            <div id="texto-inicio">
+                <p>Aprender nunca termina. Esta plataforma respeta tu ritmo. Usa los botones de arriba para explorar los ejercicios de Matemática y Lenguaje pensados para tu vida diaria.</p>
+            </div>
         </section>
 
         <section id="matematica" class="section">
-            <h2>Matemática Interactiva</h2>
-            
-            <button class="btn-audio" onclick="leerTexto('texto-mate')">
-                🔊 Escuchar Explicación
-            </button>
-
+            <h2>Matemática (Desafíos hasta el 100)</h2>
+            <button class="btn-audio" onclick="textToSpeech('texto-mate')">🔊 Escuchar Teoría Completa</button>
             <div id="texto-mate">
-                <p><strong>Los números en nuestra vida diaria:</strong> Los usamos todos los días, ya sea para contar el vuelto al comprar el pan, calcular el pasaje de la micro, o saber cuántos materiales necesitamos para un trabajo. Conocer los números y su orden nos ayuda a tomar mejores decisiones económicas y organizar nuestro tiempo.</p>
+                <p>En segundo básico trabajamos con números más grandes, desde el uno hasta el cien. Aprenderemos a ordenar cantidades altas, identificar patrones numéricos avanzados y realizar cálculos de sumas y restas útiles para el comercio.</p>
             </div>
 
-            <hr>
+            <div class="game-container">
+                <h3>Juego 1: Orden de Mayor a Menor (1 al 100)</h3>
+                <div class="pedagogical-box">
+                    <strong>¿Para qué sirve?:</strong> Desarrolla la capacidad de comparar y ordenar números de dos dígitos.<br>
+                    <strong>Habilidades:</strong> Razonamiento lógico-matemático y estructura numérica de números grandes.
+                </div>
+                
+                <div class="game-controls">
+                    <button class="btn-control btn-listen" onclick="textToSpeech('contenido-m1')">🔊 Escuchar Actividad</button>
+                    <button class="btn-control btn-reset" onclick="iniciarJuego1()">🔄 Reiniciar Juego</button>
+                </div>
 
-            <h3>Juego 1: Secuencia Numérica</h3>
-            
-            <div class="pedagogical-box">
-                <strong>Información Pedagógica de esta actividad:</strong>
-                <ul>
-                    <li><strong>¿Para qué sirve?:</strong> Ayuda a memorizar el orden correcto de los números.</li>
-                    <li><strong>Habilidades que desarrolla:</strong> Atención, razonamiento lógico y memoria visual.</li>
-                    <li><strong>¿Qué aprende?:</strong> A identificar qué número va antes y después, fundamental para contar dinero y calcular.</li>
-                </ul>
+                <div id="contenido-m1">
+                    <p>Mira los números en pantalla. Debes presionarlos en orden: <strong>desde el más pequeño (menor) al más grande (mayor)</strong>.</p>
+                </div>
+                <div class="feedback" id="feedback-m1"></div>
+                <div class="grid-sequence" id="tablero-m1"></div>
+                <button class="btn-action" onclick="iniciarJuego1()">▶ Generar nuevos números al azar</button>
             </div>
 
-            <p><strong>Instrucciones:</strong> Presiona los números en orden desde el más pequeño (1) hasta el más grande. Si te equivocas, ¡no te preocupes! El juego comenzará de nuevo para que sigas practicando.</p>
-            
-            <button class="btn-action" onclick="iniciarJuegoSecuencia()">▶ Iniciar Juego</button>
+            <div class="game-container">
+                <h3>Juego 2: Secuencias de 2 en 2</h3>
+                <div class="pedagogical-box">
+                    <strong>¿Para qué sirve?:</strong> Ayuda a reconocer patrones numéricos avanzados y el conteo saltado.<br>
+                    <strong>Habilidades:</strong> Predicción numérica y agilidad mental.
+                </div>
 
-            <div class="feedback" id="mensaje-juego"></div>
-            <div class="game-board" id="tablero-juego"></div>
+                <div class="game-controls">
+                    <button class="btn-control btn-listen" onclick="textToSpeech('contenido-m2')">🔊 Escuchar Actividad</button>
+                    <button class="btn-control btn-reset" onclick="reiniciarJuegoBasico('feedback-m2')">🔄 Reiniciar Juego</button>
+                </div>
 
-            <hr>
-            <p><em>(Aquí se añadirán los juegos de compras y completar secuencias en el futuro)</em></p>
+                <div id="contenido-m2">
+                    <p>Descubre el patrón. Esta serie va de 2 en 2. ¿Qué número falta en el espacio vacío?</p>
+                    <div class="big-text">58 - 60 - [ ? ] - 64 - 66</div>
+                    <button class="btn-option" onclick="verificarM2(61)">Opción A: 61</button>
+                    <button class="btn-option" onclick="verificarM2(62)">Opción B: 62</button>
+                    <button class="btn-option" onclick="verificarM2(63)">Opción C: 63</button>
+                </div>
+                <div class="feedback" id="feedback-m2"></div>
+            </div>
 
+            <div class="game-container">
+                <h3>Juego 3: Cálculo en el Almacén</h3>
+                <div class="pedagogical-box">
+                    <strong>¿Para qué sirve?:</strong> Aplica la suma de números de dos dígitos a una situación real de dinero.<br>
+                    <strong>Habilidades:</strong> Resolución de problemas y operaciones de adición sin reserva.
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-control btn-listen" onclick="textToSpeech('contenido-m3')">🔊 Escuchar Actividad</button>
+                    <button class="btn-control btn-reset" onclick="reiniciarJuegoBasico('feedback-m3')">🔄 Reiniciar Juego</button>
+                </div>
+
+                <div id="contenido-m3">
+                    <p>En el almacén compraste un chicle que cuesta <strong>$45 pesos</strong> y un caramelo de <strong>$32 pesos</strong>. ¿Cuánto dinero gastaste en total?</p>
+                    <button class="btn-option" onclick="verificarM3(67)">Opción A: $67 pesos</button>
+                    <button class="btn-option" onclick="verificarM3(77)">Opción B: $77 pesos</button>
+                    <button class="btn-option" onclick="verificarM3(87)">Opción C: $87 pesos</button>
+                </div>
+                <div class="feedback" id="feedback-m3"></div>
+            </div>
         </section>
 
         <section id="lenguaje" class="section">
-            <h2>Lenguaje Interactivo</h2>
-            
-            <button class="btn-audio" onclick="leerTexto('texto-lenguaje')">
-                🔊 Escuchar Explicación
-            </button>
-
-            <div id="texto-lenguaje">
-                <p><strong>La comunicación y la lectura:</strong> Leer y escribir nos permite expresarnos, comprender contratos, noticias o simples instrucciones médicas. Aprender a formar oraciones claras nos da seguridad para comunicarnos en nuestro trabajo y con nuestra familia.</p>
+            <h2>Lenguaje y Comunicación</h2>
+            <button class="btn-audio" onclick="textToSpeech('texto-leng')">🔊 Escuchar Teoría Completa</button>
+            <div id="texto-leng">
+                <p>Comprender lo que leemos y escribir correctamente nos da seguridad. Nos ayuda a entender recetas médicas, firmar documentos de trabajo y comunicarnos mejor.</p>
             </div>
 
-            <hr>
-            <h3>Juegos de Lenguaje (Próximamente)</h3>
-            <ul>
-                <li>Comprensión lectora básica.</li>
-                <li>Formación de oraciones cotidianas.</li>
-                <li>Reconocimiento correcto de palabras.</li>
-            </ul>
+            <div class="game-container">
+                <h3>Juego 1: Comprensión Médica</h3>
+                <div class="pedagogical-box">
+                    <strong>Habilidades:</strong> Comprensión lectora de textos funcionales.<br>
+                    <strong>¿Qué se aprende?:</strong> A extraer información importante de instrucciones diarias.
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-control btn-listen" onclick="textToSpeech('contenido-l1')">🔊 Escuchar Actividad</button>
+                    <button class="btn-control btn-reset" onclick="reiniciarJuegoBasico('feedback-l1')">🔄 Reiniciar Juego</button>
+                </div>
+
+                <div id="contenido-l1">
+                    <p><strong>Lee el siguiente texto:</strong> "Tomar 1 pastilla para la presión cada 8 horas. No tomar con el estómago vacío."</p>
+                    <p>¿Qué debes hacer antes de tomar la pastilla?</p>
+                    <button class="btn-option" onclick="verificarL1(0)">Opción A: Esperar 24 horas.</button>
+                    <button class="btn-option" onclick="verificarL1(1)">Opción B: Comer algo para no tener el estómago vacío.</button>
+                    <button class="btn-option" onclick="verificarL1(0)">Opción C: Tomarla solo con agua.</button>
+                </div>
+                <div class="feedback" id="feedback-l1"></div>
+            </div>
+
+            <div class="game-container">
+                <h3>Juego 2: Ordenando Ideas</h3>
+                <div class="pedagogical-box">
+                    <strong>Habilidades:</strong> Sintaxis y coherencia.<br>
+                    <strong>¿Qué se aprende?:</strong> A formar oraciones lógicas para una comunicación clara.
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-control btn-listen" onclick="textToSpeech('contenido-l2')">🔊 Escuchar Actividad</button>
+                    <button class="btn-control btn-reset" onclick="reiniciarJuegoBasico('feedback-l2')">🔄 Reiniciar Juego</button>
+                </div>
+
+                <div id="contenido-l2">
+                    <p>¿Cuál de estas oraciones está escrita de forma correcta y se entiende mejor?</p>
+                    <button class="btn-option" onclick="verificarL2(0)">Opción A: Trabajo ir a mañana voy el.</button>
+                    <button class="btn-option" onclick="verificarL2(0)">Opción B: Voy trabajo al mañana a.</button>
+                    <button class="btn-option" onclick="verificarL2(1)">Opción C: Mañana voy a ir al trabajo.</button>
+                </div>
+                <div class="feedback" id="feedback-l2"></div>
+            </div>
+
+            <div class="game-container">
+                <h3>Juego 3: La Palabra Correcta</h3>
+                <div class="pedagogical-box">
+                    <strong>Habilidades:</strong> Ortografía visual y vocabulario.<br>
+                    <strong>¿Qué se aprende?:</strong> A reconocer la escritura correcta de lugares públicos.
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-control btn-listen" onclick="textToSpeech('contenido-l3')">🔊 Escuchar Actividad</button>
+                    <button class="btn-control btn-reset" onclick="reiniciarJuegoBasico('feedback-l3')">🔄 Reiniciar Juego</button>
+                </div>
+
+                <div id="contenido-l3">
+                    <p>Necesitas comprar remedios. ¿Cuál es el letrero correcto que debes buscar en la calle?</p>
+                    <button class="btn-option" onclick="verificarL3(1)">Opción A: Farmacia</button>
+                    <button class="btn-option" onclick="verificarL3(0)">Opción B: Farmasia</button>
+                    <button class="btn-option" onclick="verificarL3(0)">Opción C: Pharmacia</button>
+                </div>
+                <div class="feedback" id="feedback-l3"></div>
+            </div>
         </section>
     </main>
 
     <script>
-        // --- 1. NAVEGACIÓN SIMPLE ---
-        function showSection(sectionId) {
-            // Oculta todas las secciones
-            document.querySelectorAll('.section').forEach(sec => {
-                sec.classList.remove('active');
-            });
-            // Muestra la sección seleccionada
-            document.getElementById(sectionId).classList.add('active');
-            // Detiene cualquier audio que se esté reproduciendo al cambiar de pestaña
+        // --- NAVEGACIÓN Y ACCESIBILIDAD ---
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
             window.speechSynthesis.cancel();
         }
 
-        // --- 2. LECTOR DE VOZ (Texto a Voz / Accesibilidad) ---
-        function leerTexto(elementId) {
+        function textToSpeech(id) {
+            const texto = document.getElementById(id).innerText;
+            hablarDirecto(texto);
+        }
+
+        function hablarDirecto(texto) {
             if ('speechSynthesis' in window) {
-                // Cancela audios previos
-                window.speechSynthesis.cancel();
-                
-                const texto = document.getElementById(elementId).innerText;
-                const mensaje = new SpeechSynthesisUtterance(texto);
-                mensaje.lang = 'es-CL'; // Español de Chile si está disponible, si no usa español general
-                mensaje.rate = 0.9; // Velocidad un poco más lenta para mejor comprensión
-                mensaje.pitch = 1;
-                
-                window.speechSynthesis.speak(mensaje);
-            } else {
-                alert("Lo siento, tu navegador no soporta la función de lectura de voz.");
+                window.speechSynthesis.cancel(); 
+                const msg = new SpeechSynthesisUtterance(texto);
+                msg.lang = 'es-CL'; 
+                msg.rate = 0.85;    
+                window.speechSynthesis.speak(msg);
             }
         }
 
-        // --- 3. LÓGICA DEL JUEGO: SECUENCIA NUMÉRICA ---
-        let numeroActualEsperado = 1;
-        const maxNumeros = 10; // Empezamos con del 1 al 10 para no abrumar la pantalla inicial
+        function reiniciarJuegoBasico(idFeedback) {
+            document.getElementById(idFeedback).innerHTML = '';
+            window.speechSynthesis.cancel();
+        }
 
-        function iniciarJuegoSecuencia() {
-            numeroActualEsperado = 1;
-            const tablero = document.getElementById('tablero-juego');
-            const mensajeDiv = document.getElementById('mensaje-juego');
-            
+        // --- MATEMÁTICA AJUSTADA A 2° BÁSICO ---
+        
+        // Juego 1: Ordenar 5 números aleatorios del 1 al 100
+        let secuenciaCorrecta = [];
+        let indiceActual = 0;
+
+        function iniciarJuego1() {
+            const tablero = document.getElementById('tablero-m1');
+            const feedback = document.getElementById('feedback-m1');
             tablero.innerHTML = '';
-            mensajeDiv.innerText = 'Selecciona el número 1';
-            mensajeDiv.style.color = 'var(--text-color)';
+            feedback.innerText = 'Cargando números...';
+            feedback.style.color = 'var(--text-color)';
+            window.speechSynthesis.cancel();
 
-            // Crear un arreglo de números y desordenarlo (shuffle)
+            // Generar 5 números aleatorios únicos del 1 al 100
             let numeros = [];
-            for (let i = 1; i <= maxNumeros; i++) {
-                numeros.push(i);
+            while(numeros.length < 5) {
+                let numAleatorio = Math.floor(Math.random() * 100) + 1;
+                if(!numeros.includes(numAleatorio)) {
+                    numeros.push(numAleatorio);
+                }
             }
-            numeros.sort(() => Math.random() - 0.5); // Mezclar números
 
-            // Crear los botones en pantalla
-            numeros.forEach(num => {
-                const btn = document.createElement('button');
-                btn.classList.add('game-btn');
-                btn.innerText = num;
-                btn.onclick = () => verificarNumero(btn, num);
-                tablero.appendChild(btn);
+            // Guardar la solución correcta (ordenada de menor a mayor)
+            secuenciaCorrecta = [...numeros].sort((a, b) => a - b);
+            indiceActual = 0;
+
+            feedback.innerText = `Busca el número más pequeño de todos: el ${secuenciaCorrecta[0]}`;
+
+            // Crear los botones desordenados en pantalla
+            numeros.forEach(n => {
+                const b = document.createElement('button');
+                b.className = 'btn-seq';
+                b.innerText = n;
+                b.onclick = () => {
+                    if(n === secuenciaCorrecta[indiceActual]) {
+                        b.disabled = true;
+                        b.style.backgroundColor = 'var(--secondary-color)';
+                        indiceActual++;
+                        
+                        if(indiceActual === secuenciaCorrecta.length) {
+                            feedback.innerText = '¡Excelente! Ordenaste correctamente los números hasta el 100.';
+                            feedback.style.color = 'green';
+                            hablarDirecto('¡Excelente! Lograste ordenar correctamente todos los números.');
+                        } else {
+                            feedback.innerText = `¡Bien! Ahora busca el siguiente número: el ${secuenciaCorrecta[indiceActual]}`;
+                            hablarDirecto(`¡Bien! Ahora busca el número ${secuenciaCorrecta[indiceActual]}`);
+                        }
+                    } else {
+                        feedback.innerText = `¡Ups! El ${n} no es el correcto. Vamos a intentarlo de nuevo.`;
+                        feedback.style.color = 'red';
+                        hablarDirecto(`Te equivocaste. El número ${n} no sigue en el orden. Reiniciando juego.`);
+                        setTimeout(iniciarJuego1, 3500);
+                    }
+                };
+                tablero.appendChild(b);
             });
         }
+        window.onload = iniciarJuego1;
 
-        function verificarNumero(botonClickeado, numero) {
-            const mensajeDiv = document.getElementById('mensaje-juego');
-
-            if (numero === numeroActualEsperado) {
-                // ¡Acierto!
-                botonClickeado.disabled = true; // Desactivar el botón para que no se pulse dos veces
-                botonClickeado.style.backgroundColor = 'var(--secondary-color)';
-                
-                if (numeroActualEsperado === maxNumeros) {
-                    mensajeDiv.innerText = '¡Felicidades! Completaste la secuencia correctamente. 🎉';
-                    mensajeDiv.style.color = 'green';
-                    reproducirSonidoExito(); // Opcional de simular
-                } else {
-                    numeroActualEsperado++;
-                    mensajeDiv.innerText = `¡Muy bien! Ahora busca el número ${numeroActualEsperado}`;
-                    mensajeDiv.style.color = 'green';
-                }
+        // Juego 2: Secuencias complejas (Patrón +2)
+        function verificarM2(respuesta) {
+            const feedback = document.getElementById('feedback-m2');
+            if(respuesta === 62) {
+                feedback.innerHTML = '¡Correcto! 🟢 La secuencia va de 2 en 2: 58, 60, <strong>62</strong>, 64, 66.';
+                feedback.style.color = 'green';
+                hablarDirecto('¡Correcto! Como la secuencia avanza de dos en dos, después del sesenta viene el sesenta y dos.');
             } else {
-                // ¡Error! Reiniciar juego
-                mensajeDiv.innerText = `Te equivocaste. Presionaste el ${numero}, pero seguía el ${numeroActualEsperado}. ¡Vamos a intentarlo de nuevo!`;
-                mensajeDiv.style.color = 'var(--warning-color)';
-                
-                // Reiniciar el juego después de 2.5 segundos para que puedan leer el error
-                setTimeout(() => {
-                    iniciarJuegoSecuencia();
-                }, 2500);
+                feedback.innerText = 'Incorrecto 🔴. Recuerda que va de 2 en 2. Súmale 2 al número 60.';
+                feedback.style.color = 'red';
+                hablarDirecto('Es incorrecto. Intenta contar de dos en dos sumándole dos al número sesenta.');
             }
         }
 
-        function reproducirSonidoExito() {
-            // Aquí se podría integrar un pequeño sonido "Ding!" en el futuro
-            if ('speechSynthesis' in window) {
-                const mensaje = new SpeechSynthesisUtterance("¡Excelente trabajo!");
-                mensaje.lang = 'es-CL';
-                window.speechSynthesis.speak(mensaje);
+        // Juego 3: Sumas grandes (45 + 32)
+        function verificarM3(respuesta) {
+            const feedback = document.getElementById('feedback-m3');
+            if(respuesta === 77) {
+                feedback.innerHTML = '¡Muy bien! 🟢 $45 pesos más $32 pesos dan un total de $77 pesos.';
+                feedback.style.color = 'green';
+                hablarDirecto('¡Muy bien! Cuarenta y cinco pesos más treinta y dos pesos suman un total de setenta y siete pesos.');
+            } else {
+                feedback.innerText = 'Incorrecto 🔴. Suma las unidades (5 + 2) y luego las decenas (4 + 3).';
+                feedback.style.color = 'red';
+                hablarDirecto('Es incorrecto. Realiza la suma con calma e inténtalo de nuevo.');
             }
+        }
+
+        // --- LÓGICA DE JUEGOS: LENGUAJE ---
+        function verificarLenguajeUniversal(esCorrecta, idFeedback, msgTextoHtml, msgVozExito, msgVozError) {
+            const feedback = document.getElementById(idFeedback);
+            if(esCorrecta) {
+                feedback.innerHTML = `¡Excelente! 🟢 ${msgTextoHtml}`;
+                feedback.style.color = 'green';
+                hablarDirecto(`¡Excelente! ${msgVozExito}`);
+            } else {
+                feedback.innerHTML = `Vuelve a intentarlo 🔴.`;
+                feedback.style.color = 'red';
+                hablarDirecto(`Vuelve a intentarlo. ${msgVozError}`);
+            }
+        }
+
+        function verificarL1(valor) {
+            verificarLenguajeUniversal(valor === 1, 'feedback-l1', 'La indicación dice: "No tomar con el estómago vacío".', 'La indicación médica dice claramente que no hay que tomarla con el estómago vacío. Por lo tanto hay que comer algo antes.', 'Lee o escucha con atención la última frase de la instrucción.');
+        }
+
+        function verificarL2(valor) {
+            verificarLenguajeUniversal(valor === 1, 'feedback-l2', 'Esta oración tiene sentido y es fácil de entender.', 'Mañana voy a ir al trabajo es la forma correcta porque las palabras están ordenadas y se entiende el mensaje.', 'Esa opción no tiene un orden lógico y no se logra entender bien.');
+        }
+
+        function verificarL3(valor) {
+            verificarLenguajeUniversal(valor === 1, 'feedback-l3', 'Se escribe "Farmacia" con la letra "c".', 'La palabra Farmacia se escribe correctamente con la letra ce.', 'Recuerda cómo ves escrito este letrero en la calle. Se escribe con ce.');
         }
     </script>
 </body>
