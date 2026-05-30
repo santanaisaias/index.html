@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendo Fácil - EPJA</title>
+    <style>
+        /* Diseño Accesible - Colores claros y letras grandes */
+        :root {
+            --bg-color: #f4f9f4;
+            --text-color: #2c3e50;
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --warning-color: #e74c3c;
+            --button-text: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            font-size: 1.5rem; /* Letra grande por defecto */
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background-color: #2980b9;
+            padding: 15px;
+        }
+
+        button {
+            font-size: 1.3rem;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-nav { background-color: var(--primary-color); color: white; }
+        .btn-action { background-color: var(--secondary-color); color: white; }
+        .btn-audio { background-color: #f1c40f; color: #333; margin-bottom: 15px;}
+        
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Ocultar secciones no activas */
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* Estilos del Juego */
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .game-btn {
+            font-size: 2rem;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .game-btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .pedagogical-box {
+            background-color: #e8f8f5;
+            border-left: 8px solid var(--secondary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .feedback {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            min-height: 35px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Aprendo Fácil</h1>
+        <p>Tu plataforma amigable para aprender paso a paso</p>
+    </header>
+
+    <nav>
+        <button class="btn-nav" onclick="showSection('inicio')">Inicio</button>
+        <button class="btn-nav" onclick="showSection('matematica')">Matemática</button>
+        <button class="btn-nav" onclick="showSection('lenguaje')">Lenguaje</button>
+    </nav>
+
+    <main>
+        <section id="inicio" class="section active">
+            <h2>¡Bienvenido a Aprendo Fácil!</h2>
+            <p>Esta plataforma está diseñada especialmente para ti. Aquí podrás reforzar tus conocimientos de Matemática y Lenguaje de una forma sencilla y divertida.</p>
+            <p>Utiliza los botones de arriba para navegar. En cada sección encontrarás teoría, un botón para escuchar la explicación en audio y juegos interactivos.</p>
+        </section>
+
+        <section id="matematica" class="section">
+            <h2>Matemática Interactiva</h2>
+            
+            <button class="btn-audio" onclick="leerTexto('texto-mate')">
+                🔊 Escuchar Explicación
+            </button>
+
+            <div id="texto-mate">
+                <p><strong>Los números en nuestra vida diaria:</strong> Los usamos todos los días, ya sea para contar el vuelto al comprar el pan, calcular el pasaje de la micro, o saber cuántos materiales necesitamos para un trabajo. Conocer los números y su orden nos ayuda a tomar mejores decisiones económicas y organizar nuestro tiempo.</p>
+            </div>
+
+            <hr>
+
+            <h3>Juego 1: Secuencia Numérica</h3>
+            
+            <div class="pedagogical-box">
+                <strong>Información Pedagógica de esta actividad:</strong>
+                <ul>
+                    <li><strong>¿Para qué sirve?:</strong> Ayuda a memorizar el orden correcto de los números.</li>
+                    <li><strong>Habilidades que desarrolla:</strong> Atención, razonamiento lógico y memoria visual.</li>
+                    <li><strong>¿Qué aprende?:</strong> A identificar qué número va antes y después, fundamental para contar dinero y calcular.</li>
+                </ul>
+            </div>
+
+            <p><strong>Instrucciones:</strong> Presiona los números en orden desde el más pequeño (1) hasta el más grande. Si te equivocas, ¡no te preocupes! El juego comenzará de nuevo para que sigas practicando.</p>
+            
+            <button class="btn-action" onclick="iniciarJuegoSecuencia()">▶ Iniciar Juego</button>
+
+            <div class="feedback" id="mensaje-juego"></div>
+            <div class="game-board" id="tablero-juego"></div>
+
+            <hr>
+            <p><em>(Aquí se añadirán los juegos de compras y completar secuencias en el futuro)</em></p>
+
+        </section>
+
+        <section id="lenguaje" class="section">
+            <h2>Lenguaje Interactivo</h2>
+            
+            <button class="btn-audio" onclick="leerTexto('texto-lenguaje')">
+                🔊 Escuchar Explicación
+            </button>
+
+            <div id="texto-lenguaje">
+                <p><strong>La comunicación y la lectura:</strong> Leer y escribir nos permite expresarnos, comprender contratos, noticias o simples instrucciones médicas. Aprender a formar oraciones claras nos da seguridad para comunicarnos en nuestro trabajo y con nuestra familia.</p>
+            </div>
+
+            <hr>
+            <h3>Juegos de Lenguaje (Próximamente)</h3>
+            <ul>
+                <li>Comprensión lectora básica.</li>
+                <li>Formación de oraciones cotidianas.</li>
+                <li>Reconocimiento correcto de palabras.</li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        // --- 1. NAVEGACIÓN SIMPLE ---
+        function showSection(sectionId) {
+            // Oculta todas las secciones
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            // Muestra la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            // Detiene cualquier audio que se esté reproduciendo al cambiar de pestaña
+            window.speechSynthesis.cancel();
+        }
+
+        // --- 2. LECTOR DE VOZ (Texto a Voz / Accesibilidad) ---
+        function leerTexto(elementId) {
+            if ('speechSynthesis' in window) {
+                // Cancela audios previos
+                window.speechSynthesis.cancel();
+                
+                const texto = document.getElementById(elementId).innerText;
+                const mensaje = new SpeechSynthesisUtterance(texto);
+                mensaje.lang = 'es-CL'; // Español de Chile si está disponible, si no usa español general
+                mensaje.rate = 0.9; // Velocidad un poco más lenta para mejor comprensión
+                mensaje.pitch = 1;
+                
+                window.speechSynthesis.speak(mensaje);
+            } else {
+                alert("Lo siento, tu navegador no soporta la función de lectura de voz.");
+            }
+        }
+
+        // --- 3. LÓGICA DEL JUEGO: SECUENCIA NUMÉRICA ---
+        let numeroActualEsperado = 1;
+        const maxNumeros = 10; // Empezamos con del 1 al 10 para no abrumar la pantalla inicial
+
+        function iniciarJuegoSecuencia() {
+            numeroActualEsperado = 1;
+            const tablero = document.getElementById('tablero-juego');
+            const mensajeDiv = document.getElementById('mensaje-juego');
+            
+            tablero.innerHTML = '';
+            mensajeDiv.innerText = 'Selecciona el número 1';
+            mensajeDiv.style.color = 'var(--text-color)';
+
+            // Crear un arreglo de números y desordenarlo (shuffle)
+            let numeros = [];
+            for (let i = 1; i <= maxNumeros; i++) {
+                numeros.push(i);
+            }
+            numeros.sort(() => Math.random() - 0.5); // Mezclar números
+
+            // Crear los botones en pantalla
+            numeros.forEach(num => {
+                const btn = document.createElement('button');
+                btn.classList.add('game-btn');
+                btn.innerText = num;
+                btn.onclick = () => verificarNumero(btn, num);
+                tablero.appendChild(btn);
+            });
+        }
+
+        function verificarNumero(botonClickeado, numero) {
+            const mensajeDiv = document.getElementById('mensaje-juego');
+
+            if (numero === numeroActualEsperado) {
+                // ¡Acierto!
+                botonClickeado.disabled = true; // Desactivar el botón para que no se pulse dos veces
+                botonClickeado.style.backgroundColor = 'var(--secondary-color)';
+                
+                if (numeroActualEsperado === maxNumeros) {
+                    mensajeDiv.innerText = '¡Felicidades! Completaste la secuencia correctamente. 🎉';
+                    mensajeDiv.style.color = 'green';
+                    reproducirSonidoExito(); // Opcional de simular
+                } else {
+                    numeroActualEsperado++;
+                    mensajeDiv.innerText = `¡Muy bien! Ahora busca el número ${numeroActualEsperado}`;
+                    mensajeDiv.style.color = 'green';
+                }
+            } else {
+                // ¡Error! Reiniciar juego
+                mensajeDiv.innerText = `Te equivocaste. Presionaste el ${numero}, pero seguía el ${numeroActualEsperado}. ¡Vamos a intentarlo de nuevo!`;
+                mensajeDiv.style.color = 'var(--warning-color)';
+                
+                // Reiniciar el juego después de 2.5 segundos para que puedan leer el error
+                setTimeout(() => {
+                    iniciarJuegoSecuencia();
+                }, 2500);
+            }
+        }
+
+        function reproducirSonidoExito() {
+            // Aquí se podría integrar un pequeño sonido "Ding!" en el futuro
+            if ('speechSynthesis' in window) {
+                const mensaje = new SpeechSynthesisUtterance("¡Excelente trabajo!");
+                mensaje.lang = 'es-CL';
+                window.speechSynthesis.speak(mensaje);
+            }
+        }
+    </script>
+</body>
+</html>
